@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DetailsVC.h
 //  MeteoApp
 //
 //  Created by MacBook Pro on 20/02/2017.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface DetailsViewController : UIViewController
 
 @end
-
