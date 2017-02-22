@@ -31,7 +31,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [self updateUI];
 }
 
@@ -43,13 +42,10 @@
       parameters:nil
         progress:nil
          success:^(NSURLSessionTask *task, id responseObject) {
-             NSLog(@"Success");
              dataDictionary = (NSDictionary *)responseObject;
              // parse Data
-             NSLog(@"Success Cast");
              dispatch_async(dispatch_get_main_queue(), ^{
                  // Update the UI
-                 NSLog(@"Back to MainThrread Cast");
                 [self parseData];
                 [self updateUI];
              });
@@ -66,7 +62,6 @@
 #pragma mark - Parse data
 -(void) parseData
 {
-    NSLog(@"parseData");
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     NSArray *resultList = dataDictionary[@"list"];
@@ -75,22 +70,35 @@
         for (NSDictionary *dict in resultList)
         {
             Observation *myObservation = [[Observation alloc] init];
-            NSString *KL = [NSString stringWithFormat:@"%@",dict[@"temp"][@"day"]];
+            NSString *KLDay = [NSString stringWithFormat:@"%@",dict[@"temp"][@"day"]];
             NSArray *temp = dict[@"weather"];
             // conversion from Kelvin to celsuis
-            myObservation.temperatureDescription = [NSString stringWithFormat:@"%d°",(int)round([KL intValue]-273.15)];
+            myObservation.temperatureDescription = [NSString stringWithFormat:@"%d°",[self Kelvin_To_celsuis:KLDay]];
+            NSString *KLMin = [NSString stringWithFormat:@"%@",dict[@"temp"][@"min"]];
+            NSString *KLMax = [NSString stringWithFormat:@"%@",dict[@"temp"][@"max"]];
+            NSString *KLMorning = [NSString stringWithFormat:@"%@",dict[@"temp"][@"morn"]];
+            NSString *KLEven = [NSString stringWithFormat:@"%@",dict[@"temp"][@"eve"]];
+            NSString *KLNight = [NSString stringWithFormat:@"%@",dict[@"temp"][@"night"]];
+            NSString *pressure = [NSString stringWithFormat:@"%@",dict[@"pressure"]];
+            NSString *humidity = [NSString stringWithFormat:@"%@",dict[@"humidity"]];
+            myObservation.temperatureMax = [NSString stringWithFormat:@"%d°",[self Kelvin_To_celsuis:KLMin]];
+            myObservation.temperatureMin = [NSString stringWithFormat:@"%d°",[self Kelvin_To_celsuis:KLMax]];
+            myObservation.temperatureMorning = [NSString stringWithFormat:@"%d°",[self Kelvin_To_celsuis:KLMorning]];
+            myObservation.temperatureEvening = [NSString stringWithFormat:@"%d°",[self Kelvin_To_celsuis:KLEven]];
+            myObservation.temperatureNight = [NSString stringWithFormat:@"%d°",[self Kelvin_To_celsuis:KLNight]];
+            myObservation.pressure = pressure;
+            myObservation.humidity = humidity;
             myObservation.weatherDescription = temp[0][@"description"];
             myObservation.iconUrl = temp[0][@"icon"];
-            // load icon weather async
-//            NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",
-//                                                                    ICON_API_URL,myObservation.iconUrl,@".png"]]];
-            // save icon image localy
-//            [self saveIcon:[UIImage imageWithData:data] :myObservation.iconUrl];
-            NSLog(@"Object added");
             [realm addObject:myObservation];
         }
     [realm commitWriteTransaction];
     }
+}
+
+-(int) Kelvin_To_celsuis:(NSString *) temp
+{
+    return (int)round([temp intValue]-273.15);
 }
 
 #pragma mark - save and load  image in the App directory
@@ -125,9 +133,7 @@
 -(void) updateUI
 {
 // Update the UI for the First Day
-    NSLog(@"BEFORE [Observation allObjects]");
     observationArray = [Observation allObjects];
-    NSLog(@"AFTER [Observation allObjects]   :: %ld", observationArray.count);
     if (observationArray.count > 0) {
         Observation *myFirstObservation = [observationArray objectAtIndex:0];
         weatherLabel.text = myFirstObservation.weatherDescription;
@@ -136,7 +142,6 @@
     }
     // reload data in the table view
     [tableView reloadData];
-    NSLog(@"END updateUI");
 }
 
 #pragma mark - UITableView Delegate

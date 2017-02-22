@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		524A2BC31E5D855200F66C05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524A2BC21E5D855200F66C05 /* Media.xcassets */; };
+		524A2BC91E5DED8700F66C05 /* MyManagerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 524A2BC81E5DED8700F66C05 /* MyManagerAPI.m */; };
 		527254FE1E5AFE38001E8F57 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 527254FD1E5AFE38001E8F57 /* main.m */; };
 		527255011E5AFE38001E8F57 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 527255001E5AFE38001E8F57 /* AppDelegate.m */; };
 		527255041E5AFE38001E8F57 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 527255031E5AFE38001E8F57 /* MainViewController.m */; };
@@ -24,6 +25,8 @@
 		1A935CDA5DF2E58F08070133 /* Pods_MeteoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeteoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAA1738B7FE63CB88FD5E60 /* Pods-MeteoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeteoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeteoApp/Pods-MeteoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		524A2BC21E5D855200F66C05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		524A2BC71E5DED8700F66C05 /* MyManagerAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyManagerAPI.h; sourceTree = "<group>"; };
+		524A2BC81E5DED8700F66C05 /* MyManagerAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyManagerAPI.m; sourceTree = "<group>"; };
 		527254F91E5AFE38001E8F57 /* MeteoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeteoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		527254FD1E5AFE38001E8F57 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		527254FF1E5AFE38001E8F57 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,6 +66,23 @@
 			name = CustomCell;
 			sourceTree = "<group>";
 		};
+		524A2BC51E5DD94E00F66C05 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				524A2BC21E5D855200F66C05 /* Media.xcassets */,
+			);
+			name = Ressources;
+			sourceTree = "<group>";
+		};
+		524A2BC61E5DED5300F66C05 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				524A2BC71E5DED8700F66C05 /* MyManagerAPI.h */,
+				524A2BC81E5DED8700F66C05 /* MyManagerAPI.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
 		527254F01E5AFE38001E8F57 = {
 			isa = PBXGroup;
 			children = (
@@ -84,14 +104,15 @@
 		527254FB1E5AFE38001E8F57 /* MeteoApp */ = {
 			isa = PBXGroup;
 			children = (
+				524A2BC61E5DED5300F66C05 /* Manager */,
 				527254FF1E5AFE38001E8F57 /* AppDelegate.h */,
 				527255001E5AFE38001E8F57 /* AppDelegate.m */,
 				5289082F1E5C8B5A00B5921F /* Constantes.h */,
 				524A2BC41E5DD2FA00F66C05 /* CustomCell */,
-				5272551F1E5B4926001E8F57 /* Controller */,
+				5272551F1E5B4926001E8F57 /* ViewControllers */,
 				5272551E1E5B4911001E8F57 /* model */,
 				528908301E5C8C5400B5921F /* View */,
-				5272550D1E5AFE38001E8F57 /* Info.plist */,
+				524A2BC51E5DD94E00F66C05 /* Ressources */,
 				527254FC1E5AFE38001E8F57 /* Supporting Files */,
 			);
 			path = MeteoApp;
@@ -100,6 +121,7 @@
 		527254FC1E5AFE38001E8F57 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5272550D1E5AFE38001E8F57 /* Info.plist */,
 				527254FD1E5AFE38001E8F57 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -114,7 +136,7 @@
 			name = model;
 			sourceTree = "<group>";
 		};
-		5272551F1E5B4926001E8F57 /* Controller */ = {
+		5272551F1E5B4926001E8F57 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				527255021E5AFE38001E8F57 /* MainViewController.h */,
@@ -122,7 +144,7 @@
 				527255171E5B41AC001E8F57 /* DetailsViewController.h */,
 				527255181E5B41AC001E8F57 /* DetailsViewController.m */,
 			);
-			name = Controller;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		528908301E5C8C5400B5921F /* View */ = {
@@ -130,7 +152,6 @@
 			children = (
 				527255051E5AFE38001E8F57 /* Main.storyboard */,
 				5272550A1E5AFE38001E8F57 /* LaunchScreen.storyboard */,
-				524A2BC21E5D855200F66C05 /* Media.xcassets */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -280,6 +301,7 @@
 				527255041E5AFE38001E8F57 /* MainViewController.m in Sources */,
 				527255011E5AFE38001E8F57 /* AppDelegate.m in Sources */,
 				527255191E5B41AC001E8F57 /* DetailsViewController.m in Sources */,
+				524A2BC91E5DED8700F66C05 /* MyManagerAPI.m in Sources */,
 				5272551D1E5B474A001E8F57 /* Observation.m in Sources */,
 				527254FE1E5AFE38001E8F57 /* main.m in Sources */,
 			);

@@ -12,6 +12,8 @@
 @synthesize tempLabel;
 @synthesize weatherLabel;
 @synthesize weatherImageView;
+@synthesize templabelMax;
+@synthesize templabelMin;
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -23,11 +25,10 @@
 
 #pragma mark - configureCellWithObservation
 - (void)configureCellWithObservation:(Observation *)anObservation {
-    
-    NSLog(@"configureCellWithObservation");
-    
     tempLabel.text = [NSString stringWithFormat:@"%@", anObservation.temperatureDescription];
     weatherLabel.text   = anObservation.weatherDescription;
+    templabelMax.text = anObservation.temperatureMax;
+    templabelMin.text = anObservation.temperatureMin;
     [self loadImage:anObservation.iconUrl];
 }
 - (void) loadImage:(NSString*)name
